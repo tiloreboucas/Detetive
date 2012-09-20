@@ -16,7 +16,7 @@
     <link href="css/smoothness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
     <link href="css/jquery.mobile-1.1.1.min.css"  rel="stylesheet" />
   </head>
-  <body> 
+  <body>
     <!-- Home -->
     <div data-role="page" id="home">
       <div data-role="header" data-position="fixed">
