@@ -4,12 +4,14 @@
     include "Conect.php";
 
     // Recupera Dados
-    $email = $_REQUEST["email"];
+    $name = $_REQUEST["name"];
     $senha = md5($_REQUEST["senha"]);
+    $host = "tilowr@gmail.com"; // Recuperar o HOST
+    $players = "[{ email: ".$host."}]"; // Adicionar o Host a Lista de Players
 
-    // Procura Email Já Existente na base
-    $result = mysql_query( "SELECT email FROM Users WHERE email='".$email."'");
-    
+    // Procura Nome de Partida Já Existente na base
+    $result = mysql_query( "SELECT name FROM Games WHERE name='".$name."'");
+
     if (!$result) {
 	    echo 'Não foi possível executar a consulta: ' . mysql_error();
 	    exit;
@@ -20,7 +22,7 @@
 	    	echo "false";
 	    } else {
 	    	// Insere Dados
-			$query = "INSERT INTO Users(email, senha) VALUES ('".$email."','".$senha."')";
+			$query = "INSERT INTO Games(name, senha, host, players) VALUES ('".$name."','".$senha."','".$host."','".$players."')";
 
 			if(!$insert = mysql_query($query))
 			{

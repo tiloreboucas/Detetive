@@ -1,5 +1,7 @@
 var Detetive = {
 	CreateUser: function(){		
+		$.mobile.changePage("#home");
+
 		var email = $('#CreateUser_email').val();
 		var senha = $('#CreateUser_senha').val();
 
@@ -22,6 +24,37 @@ var Detetive = {
 				}
 			}
 		});
+	},
+
+	Login: function(){
+		$.mobile.changePage("#home");	
+	},
+
+	CreateGame: function(){
+		$.mobile.changePage("#home");
+
+		var name = $('#game_name').val();
+		var senha = $('#game_senha').val();
+
+		var ajaxUrl = 'ajax/CreateGame.php?name='+name+'&senha='+senha;
+
+		$.ajax({
+			url: ajaxUrl,
+			success: function(data) {
+				var result = eval(data);
+				if(result) {	
+					$.mobile.changePage("#CreateGame_sucesso", { 
+						transition: "pop",
+						role: "dialog"
+					});
+				} else {
+					$.mobile.changePage("#CreateGame_falha", { 
+						transition: "pop",
+						role: "dialog"
+					});
+				}
+			}
+		});	
 	}
 };
 
