@@ -19,25 +19,25 @@
   </head>
   <body>
     <!-- Login -->
-    <div data-role="page" id="login">
+    <div data-role="page" id="PageLogin">
       <div data-role="header" data-position="fixed">
         <h1>Detetive</h1>
         <a href="#cadastro" data-icon="plus" class="ui-btn-right">Novo</a>
       </div>
       <div data-role="content">
-        <h2>Bem-Vindo!</h2>    
+        <h2>Login</h2>    
         <form action="javascript:Detetive.Login();" id="form_login" method="post">
           <ul data-role="listview">
             <li>
               <div data-role="fieldcontain">
-                <label for="email">Email:</label>
-                <input type="text" name="email" id="email" value="" placeholder="Email"/>
+                <label for="login_email">Email:</label>
+                <input type="text" name="login_email" id="login_email" value="" placeholder="Email"/>
               </div>
             </li>
             <li>
               <div data-role="fieldcontain">
-                <label for="senha">Senha:</label>
-                <input type="password" name="senha" id="senha" value="" placeholder="Senha"/>
+                <label for="login_senha">Senha:</label>
+                <input type="password" name="login_senha" id="login_senha" value="" placeholder="Senha"/>
               </div>
             </li>
             <li>
@@ -52,7 +52,7 @@
     <!-- Cadastro de Usuário -->
     <div data-role="page" id="cadastro">
       <div data-role="header" data-position="fixed">
-        <a href="#login" data-icon="home">Login</a>
+        <a href="#PageLogin" data-icon="home">Login</a>
         <h1>Detetive</h1>
       </div>
       <div data-role="content">
@@ -88,7 +88,7 @@
       <div data-role="content">
         <h2>Parabéns!</h2>    
         <p>Cadastro efetuado com sucesso!</p>
-        <a href="#login" data-role="button" data-icon="home">entrar</a>
+        <a href="#PageLogin" data-role="button" data-icon="home">entrar</a>
       </div>
       <div data-role="footer" data-position="fixed"></div>
     </div>
@@ -117,7 +117,7 @@
         <h2>Home</h2>    
         <ul data-role="listview">
           <li><a href="#criarPartida" data-role="button" data-icon="plus">Criar uma partida</a></li>
-          <li><a href="#login" data-role="button" data-icon="search">Entrar em uma partida</a></li>  
+          <li><a href="#GameList" data-role="button" data-icon="search">Entrar em uma partida</a></li>  
         </ul>
       </div>
       <div data-role="footer" data-position="fixed"></div>
@@ -126,6 +126,7 @@
     <!-- Criar Partida -->
     <div data-role="page" id="criarPartida">
       <div data-role="header" data-position="fixed">
+        <a href="#home" data-role="button" data-icon="home">Home</a>
         <h1>Detetive</h1>
         <a href="#perfil" data-icon="gear" class="ui-btn-right">Perfil</a>
       </div>
@@ -154,7 +155,7 @@
       <div data-role="footer" data-position="fixed"></div>
     </div>
     
-    <!-- Confirmação de Cadastro de Usuário -->
+    <!-- Confirmação de Cadastro de Partida -->
     <div data-role="page" data-transition="pop" id="CreateGame_sucesso">
       <div data-role="header" data-position="fixed">
         <h1>Detetive</h1>
@@ -162,12 +163,12 @@
       <div data-role="content">
         <h2>Parabéns!</h2>    
         <p>Partida criada com sucesso!</p>
-        <a href="#HostHome" data-role="button" data-icon="home">entrar</a>
+        <a href="#GameRoom" id="CreateGame_sucesso_btEntrar" data-role="button" data-icon="home">entrar</a>
       </div>
       <div data-role="footer" data-position="fixed"></div>
     </div>
 
-    <!-- Falha de Cadastro de Usuário -->
+    <!-- Falha de Cadastro de Partida -->
     <div data-role="page" data-transition="pop" id="CreateGame_falha">
       <div data-role="header" data-position="fixed">
         <h1>Detetive</h1>
@@ -175,24 +176,38 @@
       <div data-role="content">
         <h2>Atenção!</h2>    
         <p>Já existe uma partida com esse nome!</p>
-        <a href="#esqueciSenha" data-role="button">Entrar na partida</a>
+        <a href="#GameList" data-role="button">Entrar em uma partida</a>
         <a href="#criarPartida" data-role="button">Tentar com outro nome</a>
       </div>
       <div data-role="footer" data-position="fixed"></div>
     </div>
 
-    <!-- Host - Home -->
-    <div data-role="page" id="HostHome">
+    <!-- Game Room -->
+    <div data-role="page" id="GameRoom">
       <div data-role="header" data-position="fixed">
+        <a href="#home" data-role="button" data-icon="home">Home</a>
         <h1>Detetive</h1>
         <a href="#perfil" data-icon="gear" class="ui-btn-right">Perfil</a>
       </div>
       <div data-role="content">
-        <h2>Host - Home</h2>    
-        <ul data-role="listview">
-          <li><a href="#criarPartida" data-role="button" data-icon="plus">Criar uma partida</a></li>
-          <li><a href="#login" data-role="button" data-icon="search">Entrar em uma partida</a></li>  
-        </ul>
+        <h2></h2>
+        <h4>Jogadores</h4>    
+        <ul data-role="listview" data-inset="true" id="ListaJogadores"></ul>
+        <button style="display: none;" id="GameRoom_btParticipar" data-role="button" data-icon="check">Participar</button>
+      </div>
+      <div data-role="footer" data-position="fixed"></div>
+    </div>
+
+    <!-- Lista de Partidas -->
+    <div data-role="page" id="GameList">
+      <div data-role="header" data-position="fixed">
+        <a href="#home" data-role="button" data-icon="home">Home</a>
+        <h1>Detetive</h1>
+        <a href="#perfil" data-icon="gear" class="ui-btn-right">Perfil</a>
+      </div>
+      <div data-role="content">
+        <h2>Escolha uma Partida</h2>    
+        <ul data-role="listview" id="ListaPartidas" data-filter="true"></ul>
       </div>
       <div data-role="footer" data-position="fixed"></div>
     </div>
